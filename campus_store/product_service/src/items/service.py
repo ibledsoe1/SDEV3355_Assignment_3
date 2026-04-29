@@ -2,6 +2,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from src.db.items import Item
 from .schemas import ItemCreateModel
 from sqlmodel import select
+import httpx
 
 
 class ItemService:
@@ -18,6 +19,11 @@ class ItemService:
         new_item = Item(**item_create_data.model_dump())
         self.session.add(new_item)
         await self.session.commit()
+        async with httpx.AsyncClient() as client:
+            await client.post(
+                "https://product-worker.ibledsoe1.workers.dev",
+                json={"name": new_item.name, "price": new_item.price}
+            )
         return new_item
 
     async def delete_item(self, item_id):
