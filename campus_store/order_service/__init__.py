@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from src.db.main import init_db
-from src.items.routes import item_router
+from src.orders.routes import order_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -17,4 +17,4 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-app.include_router(item_router, tags=["items"])
+app.include_router(order_router, tags=["orders"])

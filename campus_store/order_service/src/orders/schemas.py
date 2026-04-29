@@ -1,14 +1,12 @@
-from src.db.items import Item
+from src.db.orders import Order
 from pydantic import BaseModel
 
-class ItemResponseModel(Item):
+class OrderResponseModel(Order):
     # this is used to validate response when getting items
     pass
 
-class ItemCreateModel(BaseModel):
+class OrderCreateModel(BaseModel):
     # this is used to validate request when creating/updating a store item
     id:int
-    name:str
-    price:float
-
-#CHANGES NOT STARTED
+    item_id:int
+    quantity:int

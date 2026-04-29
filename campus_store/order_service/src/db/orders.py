@@ -4,5 +4,5 @@ import sqlalchemy.dialects.postgresql as pg
 class Order(SQLModel, table = True):
     __tablename__ = 'orders'
     id:int | None = Field(default=None, primary_key=True)
-    
-#CHANGES IN PROGRESS
+    item_id:int
+    quantity:int

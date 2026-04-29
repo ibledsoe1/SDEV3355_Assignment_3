@@ -8,7 +8,7 @@ async_engine = create_async_engine(url=settings.POSTGRES_URL, echo=True)
 
 async def init_db():
     async with async_engine.begin() as conn:
-        from .orders import Item
+        from .orders import Order
 
         await conn.run_sync(SQLModel.metadata.create_all)
 
@@ -19,5 +19,3 @@ async def get_session() -> AsyncSession:
 
     async with async_session() as session:
         yield session
-
-#CHANGES NOT STARTED

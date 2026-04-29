@@ -1,31 +1,28 @@
 from sqlmodel.ext.asyncio.session import AsyncSession
-from src.db.items import Item
-from .schemas import ItemCreateModel
+from src.db.orders import Order
+from .schemas import OrderCreateModel
 from sqlmodel import select
 
 
-class ItemService:
+class OrderService:
     # this provides the methods to do create, read, delete methods
     def __init__(self, session: AsyncSession):
         self.session = session
     
-    async def get_all_items(self):
-        statement = select(Item).order_by(Item.id)
+    async def get_all_orders(self):
+        statement = select(Order).order_by(Order.id)
         result = await self.session.exec(statement)
         return result.all()
     
-    async def create_item(self, item_create_data: ItemCreateModel):
-        new_item = Item(**item_create_data.model_dump())
-        self.session.add(new_item)
+    async def create_order(self, order_create_data: OrderCreateModel):
+        new_order = Order(**order_create_data.model_dump())
+        self.session.add(new_order)
         await self.session.commit()
-        return new_item
+        return new_order
 
-    async def delete_item(self, item_id):
-        statement = select(Item).where(Item.id == item_id)
+    async def delete_order(self, order_id):
+        statement = select(Order).where(Order.id == order_id)
         result = await self.session.exec(statement)
-        item = result.first()
-        await self.session.delete(item)
+        order = result.first()
+        await self.session.delete(order)
         await self.session.commit()
-
-#CHANGES NOT STARTED
-
