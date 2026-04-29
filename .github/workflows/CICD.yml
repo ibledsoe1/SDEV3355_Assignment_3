@@ -19,7 +19,7 @@ jobs:
           python-version: "3.13"
         
       - name: product_service install dependencies
-        run: pip install -r .././campus_store/product_service/requirements.txt
+        run: pip install -r ../campus_store/product_service/requirements.txt
 
       - name: Run tests
         run: pytest
