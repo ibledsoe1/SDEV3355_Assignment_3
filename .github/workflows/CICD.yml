@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      # dummy url for testing
+      POSTGRES_URL: postgresql+asyncpg://user:password@localhost/testdb
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
