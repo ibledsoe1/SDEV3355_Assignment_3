@@ -20,6 +20,7 @@ class ItemService:
         self.session.add(new_item)
         await self.session.commit()
         async with httpx.AsyncClient() as client:
+            # serverless function
             await client.post(
                 "https://product-worker.ibledsoe1.workers.dev",
                 json={"name": new_item.name, "price": new_item.price}

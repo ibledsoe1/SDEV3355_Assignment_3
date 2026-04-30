@@ -2,6 +2,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from src.db.orders import Order
 from .schemas import OrderCreateModel
 from sqlmodel import select
+import httpx
 
 
 class OrderService:
@@ -18,6 +19,13 @@ class OrderService:
         new_order = Order(**order_create_data.model_dump())
         self.session.add(new_order)
         await self.session.commit()
+        async with httpx.AsyncClient() as client:
+            # another serverless function
+            await client.post(
+                "https://order-worker.ibledsoe1.workers.dev",
+                json={ "customer_name": new_order.customer_name }
+            )
+
         return new_order
 
     async def delete_order(self, order_id):

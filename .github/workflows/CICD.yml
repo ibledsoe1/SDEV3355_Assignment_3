@@ -24,6 +24,9 @@ jobs:
       - name: product_service install dependencies
         run: pip install -r campus_store/product_service/requirements.txt
 
+      - name: order_service install dependencies
+        run: pip install -r campus_store/order_service/requirements.txt
+
       - name: Run tests
         run: pytest
 
@@ -36,4 +39,7 @@ jobs:
   
       - name: Build product_service image
         run: docker build -t product_service ./campus_store/product_service
+      
+      - name: Build order_service image
+        run: docker build -t order_service ./campus_store/order_service
         

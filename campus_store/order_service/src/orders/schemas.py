@@ -8,5 +8,6 @@ class OrderResponseModel(Order):
 class OrderCreateModel(BaseModel):
     # this is used to validate request when creating/updating a store item
     id:int
+    customer_name:str
+    address:str
     item_id:int
-    quantity:int
