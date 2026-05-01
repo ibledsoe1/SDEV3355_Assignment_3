@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends
 from sqlmodel.ext.asyncio.session import AsyncSession
 from typing import List
-from src.db.main import get_session
+from ..db.main import get_session
 from http import HTTPStatus
 from .service import ItemService
 from .schemas import ItemCreateModel, ItemResponseModel
