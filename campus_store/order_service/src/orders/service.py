@@ -1,5 +1,5 @@
 from sqlmodel.ext.asyncio.session import AsyncSession
-from src.db.orders import Order
+from ..db.orders import Order
 from .schemas import OrderCreateModel
 from sqlmodel import select
 import httpx

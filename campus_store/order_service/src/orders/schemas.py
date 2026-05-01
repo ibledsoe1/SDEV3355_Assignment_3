@@ -1,4 +1,4 @@
-from src.db.orders import Order
+from ..db.orders import Order
 from pydantic import BaseModel
 
 class OrderResponseModel(Order):
